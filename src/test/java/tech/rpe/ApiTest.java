@@ -11,6 +11,7 @@ import tech.rpe.entity.UserResponse;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ApiTest {
 
@@ -30,6 +31,8 @@ public class ApiTest {
                 .then().statusCode(HttpStatus.SC_CREATED).log().all()
                 .and().extract().response().as(UserResponse.class);
 
+        assertEquals("Matheus", userResponse.getName());
+        assertEquals("QA", userResponse.getJob());
         assertNotNull(userResponse.getId());
     }
 
